@@ -1,33 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Workshop: Getting to know Android Studio &amp; Gradle by stefanhoth</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/stefanhoth/workshop-androidstudio-gradle">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/stefanhoth/workshop-androidstudio-gradle/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/stefanhoth/workshop-androidstudio-gradle/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <header>
-      <div class="container">
-        <h1>Workshop: Getting to know Android Studio &amp; Gradle</h1>
-        <h2>A workshop, originally created for Droidcon Eastern Europe, for introducing people into Android Studio and Gradle</h2>
+    <div class="wrapper">
 
-        <section id="downloads">
-          <a href="https://github.com/stefanhoth/workshop-androidstudio-gradle/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/stefanhoth/workshop-androidstudio-gradle/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/stefanhoth/workshop-androidstudio-gradle" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+      <section>
+        <div id="title">
+          <h1>Workshop: Getting to know Android Studio &amp; Gradle</h1>
+          <p>A workshop, originally created for Droidcon Eastern Europe, for introducing people into Android Studio and Gradle</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/stefanhoth">stefanhoth</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-    <div class="container">
-      <section id="main_content">
         <h2>
 <a name="table-of-contents" class="anchor" href="#table-of-contents"><span class="octicon octicon-link"></span></a>Table of contents</h2>
 
@@ -41,6 +51,7 @@
 <li><a href="#part-4-understanding-gradle">Part 4: Understanding Gradle</a></li>
 <li><a href="#part-5-customize-the-gradle-build">Part 5: Customize the Gradle build</a></li>
 <li><a href="#part-6-sign-your-android-app-ready-for-the-play-store">Part 6: Sign your android app ready for the Play Store</a></li>
+<li><a href="#helpers">Helpers</a></li>
 <li><a href="#copyrightlicense">Copyright/License</a></li>
 </ul><h2>
 <a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
@@ -78,6 +89,8 @@
 
 <p>Android Studio has not a specific import for Android Eclipse projects yet. Instead it's recommended to export the project <strong>from Eclipse to Gradle</strong>.</p>
 
+<p><img src="https://raw.github.com/stefanhoth/workshop-androidstudio-gradle/gh-pages/images/step1_export.png" alt="Android Studio"></p>
+
 <ul>
 <li>Open the project <code>eclipse_project/DroidconWorkshop</code> in Eclipse</li>
 <li>Make sure to have the latest Android Developer Tools installed (22.0+)</li>
@@ -93,16 +106,104 @@
 <h2>
 <a name="part-2-meet-android-studio" class="anchor" href="#part-2-meet-android-studio"><span class="octicon octicon-link"></span></a>Part 2: Meet Android Studio</h2>
 
-<p><img src="https://raw.github.com/stefanhoth/workshop-androidstudio-gradle/gh-pages/images/step2_android_studio.png" alt="Android Studio"></p>
+<p><img src="https://raw.github.com/stefanhoth/workshop-androidstudio-gradle/gh-pages/images/step2_android_studio.png" alt="Android Studio" title="Android Studio at a glance"></p>
 
 <h2>
 <a name="part-3-setup-a-gradle-project-from-scratch" class="anchor" href="#part-3-setup-a-gradle-project-from-scratch"><span class="octicon octicon-link"></span></a>Part 3: Setup a gradle project from scratch</h2>
+
+<p>Before starting make you your build tools and Android/Google repositories are up to date.</p>
+
+<p><img src="https://raw.github.com/stefanhoth/workshop-androidstudio-gradle/gh-pages/images/step3_android-sdk1.png" alt="Android Studio" title="Build Tools"></p>
+
+<p><img src="https://raw.github.com/stefanhoth/workshop-androidstudio-gradle/gh-pages/images/step3_android-sdk2.png" alt="Android Studio" title="Repositories"></p>
 
 <h2>
 <a name="part-4-understanding-gradle" class="anchor" href="#part-4-understanding-gradle"><span class="octicon octicon-link"></span></a>Part 4: Understanding Gradle</h2>
 
 <h2>
 <a name="part-5-customize-the-gradle-build" class="anchor" href="#part-5-customize-the-gradle-build"><span class="octicon octicon-link"></span></a>Part 5: Customize the Gradle build</h2>
+
+<h3>
+<a name="changing-the-name-of-your-output-apk" class="anchor" href="#changing-the-name-of-your-output-apk"><span class="octicon octicon-link"></span></a>Changing the name of your output apk</h3>
+
+<p>Let's name the project a bit differently and add the version number to the file.</p>
+
+<pre><code>android {
+    compileSdkVersion 18
+    buildToolsVersion "18.1"
+
+    compileOptions.encoding = "UTF-8"
+
+    defaultConfig {
+        versionCode 1
+        versionName "0.5.0"
+        minSdkVersion 10
+        targetSdkVersion 18
+    }
+
+    //...
+
+    applicationVariants.all { variant -&gt;
+
+        def apk = variant.outputFile;
+        def newName = "";
+
+        newName = apk.name.replace(".apk", "-v" + defaultConfig.versionName + "-" + variant.buildType.name.toUpperCase() + ".apk");
+
+        newName = newName
+            .replace("-" + variant.buildType.name, "")
+            .replace(project.name, "AwesomeApp");
+
+        variant.outputFile = new File(apk.parentFile, newName);
+
+        logger.info('INFO: Set outputFile to ' + variant.outputFile + " for [" + variant.name + "]");
+    }
+}
+</code></pre>
+
+<h3>
+<a name="allow-to-install-the-debug-build-along-the-the-play-store-version" class="anchor" href="#allow-to-install-the-debug-build-along-the-the-play-store-version"><span class="octicon octicon-link"></span></a>Allow to install the debug build along the the Play Store version</h3>
+
+<pre><code>android {
+
+    defaultConfig {
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        debug {
+            packageNameSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
+        }
+    }
+}
+</code></pre>
+
+<h3>
+<a name="create-an-alpha-build-for-the-play-store-alpha-feature" class="anchor" href="#create-an-alpha-build-for-the-play-store-alpha-feature"><span class="octicon octicon-link"></span></a>Create an alpha build for the Play Store Alpha feature</h3>
+
+<pre><code>android {
+
+    defaultConfig {
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        debug {
+            packageNameSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
+        }
+
+        alpha.initWith(buildTypes.debug)
+        alpha {
+            packageNameSuffix = ""
+            versionNameSuffix = "-ALPHA"
+            zipAlign true
+            signingConfig signingConfigs.release
+        }
+    }
+}
+</code></pre>
 
 <h2>
 <a name="part-6-sign-your-android-app-ready-for-the-play-store" class="anchor" href="#part-6-sign-your-android-app-ready-for-the-play-store"><span class="octicon octicon-link"></span></a>Part 6: Sign your android app ready for the Play Store</h2>
@@ -111,8 +212,9 @@
 <a name="helpers" class="anchor" href="#helpers"><span class="octicon octicon-link"></span></a>Helpers</h2>
 
 <ul>
+<li><a href="http://tools.android.com/tech-docs/new-build-system/user-guide">Google Gradle Plugin Manual</a></li>
 <li><a href="http://gradleplease.appspot.com">Gradle Please</a></li>
-<li><a href="https://github.com/ligi/GradleDependenciesHelperPlugin">Gradle Depency Helper Plugin for IntelliJ/Android Studio</a></li>
+<li><a href="https://github.com/ligi/GradleDependenciesHelperPlugin">Gradle Dependency Helper Plugin for IntelliJ/Android Studio</a></li>
 </ul><h2>
 <a name="copyright--license" class="anchor" href="#copyright--license"><span class="octicon octicon-link"></span></a>Copyright / License</h2>
 
@@ -121,8 +223,9 @@
         <img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-sa/3.0/de/80x15.png"></a> This work by <a href="http://stefanhoth.de" rel="cc:attributionURL">Stefan Hoth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/de/deed.en">Creative Commons Attribution-ShareAlike 3.0 Germany License</a>
 </p>
       </section>
-    </div>
 
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
 </html>
