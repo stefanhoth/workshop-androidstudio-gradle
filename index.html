@@ -130,35 +130,88 @@
 <h2>
 <a name="part-4-understanding-gradle" class="anchor" href="#part-4-understanding-gradle"><span class="octicon octicon-link"></span></a>Part 4: Understanding Gradle</h2>
 
-<p>A typical setup for a gradle looks like this. If you worked with Maven before this should feel very familiar.</p>
+<h3>
+<a name="project-structure" class="anchor" href="#project-structure"><span class="octicon octicon-link"></span></a>Project structure</h3>
+
+<p>A typical setup for a gradle looks like this. If you worked with Maven before this should feel very familiar. Following these conventions helps avoid too much configuration.</p>
 
 <pre><code>/(project root)
-app/
-    libs/           //&lt;-- jar files
-    src/
-        main/
-            java/   //&lt;-- main code goes here
-            res/
-                drawable-hdpi
-                drawable-mdpi
-                layout
-                values
-                //.. and more
-            AndroidManifest.xml
-        beta/       //&lt;-- code and resources only for the beta-build
-            java/
-            res/
-    build.gradle
+    app/
+        libs/           //&lt;-- jar files
+        src/
+            main/
+                java/   //&lt;-- main code goes here
+                res/
+                    drawable-hdpi
+                    drawable-mdpi
+                    layout
+                    values
+                    //.. and more
+                AndroidManifest.xml
 
-lib1/
-    build.gradle    //&lt;-- use apply plugin: 'android-library'
+            beta/       //&lt;-- code and resources only for the beta-build
+                java/
+                res/
+                AndroidManifest.xml
 
-lib2/
-    build.gradle    //&lt;-- use apply plugin: 'android-library'
+    lib1/
+        build.gradle    //&lt;-- use apply plugin: 'android-library'
 
-build.gradle        //&lt;-- add android build script dependency here 
-settings.gradle     //&lt;-- include all projects
+    lib2/
+        build.gradle    //&lt;-- use apply plugin: 'android-library'
+
+    build.gradle        //&lt;-- add android build script dependency here 
+    settings.gradle     //&lt;-- include all projects
 </code></pre>
+
+<h3>
+<a name="build-variants" class="anchor" href="#build-variants"><span class="octicon octicon-link"></span></a>Build Variants</h3>
+
+<p>One goal of the new build system is to enable creating different versions of the same application.</p>
+
+<p>The idea is to allow changes like different log properties, debug output or other target servers without recompiling by hand. </p>
+
+<h3>
+<a name="product-flavors" class="anchor" href="#product-flavors"><span class="octicon octicon-link"></span></a>Product flavors</h3>
+
+<p>A product flavor defines a customized version of the application build by the project. A single project can have different flavors which change the generated application.</p>
+
+<p>This new concept is designed to help when the differences are very minimum. If the answer to “Is this the same application?” is yes, then this is probably the preferred way instead of Library Projects.</p>
+
+<p>android {
+    ...</p>
+
+<pre><code>defaultConfig {
+    minSdkVersion 8
+    versionCode 10
+}
+
+productFlavors {
+    flavor1 {
+        packageName "com.example.flavor1"
+        versionCode 20
+    }
+
+    flavor2 {
+        packageName "com.example.flavor2"
+        minSdkVersion 14
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<h3>
+<a name="overlays" class="anchor" href="#overlays"><span class="octicon octicon-link"></span></a>Overlays</h3>
+
+<p>During the build process the more general definitions (e.g. main) get overlaid by more specific definitions/files.</p>
+
+<p>For example in the folder example about you can see the <code>AndroidManifest.xml</code> in the <code>beta</code> folder. If you are building the <code>beta</code> build variant the specific one will be overlaid onto the one from main. </p>
+
+<h3>
+<a name="gradle-vs-gradlew" class="anchor" href="#gradle-vs-gradlew"><span class="octicon octicon-link"></span></a>Gradle vs. gradlew</h3>
+
+<p><code>gradlew</code> is a wrapper for gradle which helps a team to use the same gradle version. Instead of manually installing it on every machine the wrapper automatically downloads, installs and runs the right gradle version.</p>
 
 <h2>
 <a name="part-5-customize-the-gradle-build" class="anchor" href="#part-5-customize-the-gradle-build"><span class="octicon octicon-link"></span></a>Part 5: Customize the Gradle build</h2>
