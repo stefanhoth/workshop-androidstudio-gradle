@@ -208,6 +208,38 @@
 <h2>
 <a name="part-6-sign-your-android-app-ready-for-the-play-store" class="anchor" href="#part-6-sign-your-android-app-ready-for-the-play-store"><span class="octicon octicon-link"></span></a>Part 6: Sign your android app ready for the Play Store</h2>
 
+<p>Find <code>key\release.keystore</code> and copy it to your project into <code>deployment\release.keystore</code></p>
+
+<p>Adjust <code>app\build.gradle</code> to include the key.</p>
+
+<pre><code>android {
+    signingConfigs {
+
+    release {
+            storeFile file("deployment/release.keystore")
+            storePassword "release"
+            keyAlias "release"
+            keyPassword "release"
+        }
+    }
+    buildTypes {
+
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+</code></pre>
+
+<p>Run the task</p>
+
+<pre><code>gradlew assembleRelease
+</code></pre>
+
+<p>and you will find the apk in <code>app\build\apk</code> that can be uploaded into the Play Store.</p>
+
+<p>It's also possible to do this inside Android Studio by selecting the release build type.</p>
+
 <h2>
 <a name="helpers" class="anchor" href="#helpers"><span class="octicon octicon-link"></span></a>Helpers</h2>
 
